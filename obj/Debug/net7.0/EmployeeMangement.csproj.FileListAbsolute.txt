@@ -1,0 +1,14 @@
+E:\Training Course\RevChatGpr\EmployeeMangement\EmployeeMangement\bin\Debug\net7.0\EmployeeMangement.exe
+E:\Training Course\RevChatGpr\EmployeeMangement\EmployeeMangement\bin\Debug\net7.0\EmployeeMangement.deps.json
+E:\Training Course\RevChatGpr\EmployeeMangement\EmployeeMangement\bin\Debug\net7.0\EmployeeMangement.runtimeconfig.json
+E:\Training Course\RevChatGpr\EmployeeMangement\EmployeeMangement\bin\Debug\net7.0\EmployeeMangement.dll
+E:\Training Course\RevChatGpr\EmployeeMangement\EmployeeMangement\bin\Debug\net7.0\EmployeeMangement.pdb
+E:\Training Course\RevChatGpr\EmployeeMangement\EmployeeMangement\obj\Debug\net7.0\EmployeeMangement.GeneratedMSBuildEditorConfig.editorconfig
+E:\Training Course\RevChatGpr\EmployeeMangement\EmployeeMangement\obj\Debug\net7.0\EmployeeMangement.AssemblyInfoInputs.cache
+E:\Training Course\RevChatGpr\EmployeeMangement\EmployeeMangement\obj\Debug\net7.0\EmployeeMangement.AssemblyInfo.cs
+E:\Training Course\RevChatGpr\EmployeeMangement\EmployeeMangement\obj\Debug\net7.0\EmployeeMangement.csproj.CoreCompileInputs.cache
+E:\Training Course\RevChatGpr\EmployeeMangement\EmployeeMangement\obj\Debug\net7.0\EmployeeMangement.dll
+E:\Training Course\RevChatGpr\EmployeeMangement\EmployeeMangement\obj\Debug\net7.0\refint\EmployeeMangement.dll
+E:\Training Course\RevChatGpr\EmployeeMangement\EmployeeMangement\obj\Debug\net7.0\EmployeeMangement.pdb
+E:\Training Course\RevChatGpr\EmployeeMangement\EmployeeMangement\obj\Debug\net7.0\EmployeeMangement.genruntimeconfig.cache
+E:\Training Course\RevChatGpr\EmployeeMangement\EmployeeMangement\obj\Debug\net7.0\ref\EmployeeMangement.dll
