@@ -1,39 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace EmployeeMangement
 {
     public class EmployeeManager
     {
-        private List<Employee> employees = new List<Employee>();
+        // استخدام Dictionary بدلاً من List لتسريع عمليات البحث والحذف
+        private Dictionary<int, Employee> employees = new Dictionary<int, Employee>();
 
-       // public Dictionary<string, Employee> employees = new Dictionary<string, Employee>();    
-
-        // إضافة موظف إلى القائمة
-        public void AddEmployee(Employee employee)
+        // إضافة موظف إلى القاموس
+        public void AddEmployee(int employeeID, Employee employee)
         {
-            employees.Add(employee);
+            if (employees.ContainsKey(employeeID)) // التحقق من أن الموظف بنفس ID غير موجود
+            {
+                Console.WriteLine($"Error: Employee with ID {employeeID} already exists.");
+                return;
+            }
+
+            employees.Add(employeeID, employee); // إضافة الموظف
             Console.WriteLine($"Employee {employee.NameEmployee} added successfully!");
         }
 
-
-        // Update employee in list
+        // تحديث بيانات الموظف
         public void UpdateEmployee(int employeeID, string newName, int? newAge, string newJobTitle, decimal? newSalary)
         {
-            // البحث عن الموظف في القائمة
-            var employee = employees.FirstOrDefault(emp => emp.EmployeeID == employeeID);
-
-            if (employee != null) // التأكد من أن الموظف موجود
+            // البحث عن الموظف باستخدام TryGetValue (طريقة أكثر كفاءة)
+            if (employees.TryGetValue(employeeID, out var employee))
             {
-                // تحديث بيانات الموظف
-                 if (!string.IsNullOrEmpty(newName))
-                    employee.NameEmployee = newName;
-                if (newAge.HasValue)
-                    employee.Age = newAge.Value;
-                if (!string.IsNullOrEmpty(newJobTitle))
-                    employee.JobTitle = newJobTitle;
-                if (newSalary.HasValue)
-                    employee.Salary = newSalary.Value;
+                // تحديث البيانات إذا كانت القيم الجديدة غير null أو فارغة
+                if (!string.IsNullOrEmpty(newName)) employee.NameEmployee = newName;
+                if (newAge.HasValue) employee.Age = newAge.Value;
+                if (!string.IsNullOrEmpty(newJobTitle)) employee.JobTitle = newJobTitle;
+                if (newSalary.HasValue) employee.Salary = newSalary.Value;
 
                 Console.WriteLine($"Employee {employee.EmployeeID} updated successfully!");
             }
@@ -43,16 +42,13 @@ namespace EmployeeMangement
             }
         }
 
-        // Delete employee in list
+        // حذف موظف من القاموس
         public void DeleteEmployee(int employeeID)
         {
-            // البحث عن الموظف في القائمة
-            var employee = employees.FirstOrDefault(emp => emp.EmployeeID == employeeID);
-
-            if (employee != null) // التأكد من أن الموظف موجود
+            // استخدام Remove مباشرة دون الحاجة إلى البحث أولًا
+            if (employees.Remove(employeeID))
             {
-                employees.Remove(employee); // حذف الموظف من القائمة
-                Console.WriteLine($"Employee {employee.NameEmployee} deleted successfully.");
+                Console.WriteLine($"Employee with ID {employeeID} deleted successfully.");
             }
             else
             {
@@ -69,27 +65,23 @@ namespace EmployeeMangement
                 return;
             }
 
-            foreach (var emp in employees)
+            foreach (var emp in employees.Values) // استخدام `Values` للوصول إلى جميع الموظفين
             {
                 Console.WriteLine($"ID: {emp.EmployeeID}, Name: {emp.NameEmployee}, Age: {emp.Age}, Job: {emp.JobTitle}, Salary: {emp.Salary}");
             }
         }
-     
 
-        // البحث عن موظف
+        // البحث عن موظف بواسطة ID أو الاسم
         public Employee SearchEmployee(int? employeeID = null, string nameEmployee = null)
-            {
-            //StringComparison.OrdinalIgnoreCaseحساسية الاحرف 
-            //employeeID.HasValue: تحقق إذا كانت قيمة employeeID تم تحديدها أو إذا كانت غير null.
-            var result = employees.FirstOrDefault(x =>
-                    (employeeID.HasValue && x.EmployeeID == employeeID) ||
-                    (!string.IsNullOrEmpty(nameEmployee) && x.NameEmployee.Equals(nameEmployee, StringComparison.OrdinalIgnoreCase))
-                );
+        {
+            return employees.Values.FirstOrDefault(emp =>
+                (employeeID.HasValue && emp.EmployeeID == employeeID) ||
+                (!string.IsNullOrEmpty(nameEmployee) && emp.NameEmployee.Equals(nameEmployee, StringComparison.OrdinalIgnoreCase))
+            );
+        }
 
-                return result;
-            }
-
-          public void CalculateSalaryStats()
+        // حساب إحصائيات الرواتب (إجمالي ومتوسط الرواتب)
+        public void CalculateSalaryStats()
         {
             if (employees.Count == 0)
             {
@@ -97,22 +89,14 @@ namespace EmployeeMangement
                 return;
             }
 
-            decimal totalSalary = employees.Sum(emp => emp.Salary); // حساب إجمالي الرواتب
-            decimal averageSalary = employees.Average(emp => emp.Salary); // حساب متوسط الرواتب
+            decimal totalSalary = employees.Values.Sum(emp => emp.Salary); // حساب إجمالي الرواتب
+            decimal averageSalary = employees.Values.Average(emp => emp.Salary); // حساب متوسط الرواتب
 
             Console.WriteLine($"Total Salary: {totalSalary}");
             Console.WriteLine($"Average Salary: {averageSalary}");
-
         }
-
-
-
-
-
-
-
     }
 
 
+   
 }
-

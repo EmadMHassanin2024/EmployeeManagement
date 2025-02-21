@@ -9,10 +9,9 @@ namespace EmployeeMangement
             EmployeeManager manager = new EmployeeManager();
 
             // إضافة موظفين إلى القائمة
-            manager.AddEmployee(new Employee(1, "Ali", 30, "Software Engineer", 7000));
-            manager.AddEmployee(new Employee(2, "Sara", 28, "Project Manager", 9000));
-            manager.AddEmployee(new Employee(3, "Omar", 40, "HR Manager", 6000));
-            manager.AddEmployee(new Employee(4, "Lina", 35, "Data Scientist", 8000));
+            manager.AddEmployee(1,new Employee(2, "Sara", 28, "Project Manager", 9000));
+            manager.AddEmployee(2,new Employee(3, "Omar", 40, "HR Manager", 6000));
+            manager.AddEmployee(3,new Employee(4, "Lina", 35, "Data Scientist", 8000));
 
             // عرض قائمة الموظفين
             manager.DisplayEmployees();
